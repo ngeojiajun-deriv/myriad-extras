@@ -29,7 +29,7 @@ else
     fi
     which docker > /dev/null || bail "cannot find docker! Exitting";
 
-    IMAGE_NAME='deriv-enterprise/myriad:latest';
+    IMAGE_NAME='deriv/myriad:latest';
 
     # Rebuild the image if there is a Dockerfile there
     if [ -f "$DIR/Dockerfile" ]; then
