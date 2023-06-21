@@ -7,3 +7,8 @@ very unsure the syntax of the file
 Usage: `01_syntax.sh <dir> ...`
 Attempt to check syntax of all files under `<dir>/lib/`. Will use the provided docker file
 or it will pick `deriv-enterprise/myriad` when it is absent
+
+## `99_new_service.sh`
+Usage:  `99_new_service.sh <perl package name>`
+Create a new service from the template
+
