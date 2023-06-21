@@ -18,7 +18,7 @@ OVERIDDEN_IMAGE_NAME=$2;
 
 if [ $DIR == '--exec-inner' ]; then
     # Inner suite
-    for FILE in $(find . -type f \( -iname *.pm \)); do
+    for FILE in $(find . -type f -name '*.pm'); do
         perl -cw -I/app/lib -MMyriad $FILE || bail "Check failed for the file $FILE";
     done
     exit 0;
