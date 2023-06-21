@@ -19,7 +19,7 @@ OVERIDDEN_IMAGE_NAME=$2;
 if [ $DIR == '--exec-inner' ]; then
     # Inner suite
     for FILE in $(find . -type f \( -iname *.pm \)); do
-        perl -cw -I/app/lib -MMyriad $FILE;
+        perl -cw -I/app/lib -MMyriad $FILE || bail "Check failed for the file $FILE";
     done
     exit 0;
 else
@@ -42,7 +42,8 @@ else
     # Create the image and actually run it
     docker run -it --rm -v $(expand_path $DIR):/app/ -v $(expand_path $(which $0)):/ci-tools  --entrypoint /bin/bash $IMAGE_NAME -c \
             'cd /app && /ci-tools/01_syntax.sh --exec-inner' 
-
+    RET=$?
     # Cleanup if it is auto regenerated
     [ -f "$DIR/Dockerfile" ] && [ "$IMAGE_NAME" != "$OVERIDDEN_IMAGE_NAME" ] && docker image rm $IMAGE_NAME;
+    exit $RET;
 fi
