@@ -40,7 +40,7 @@ else
     fi
     
     # Create the image and actually run it
-    docker run -it --rm -v $(expand_path $DIR):/app/ -v $(expand_path $(which $0)):/ci-tools  --entrypoint /bin/bash $IMAGE_NAME -c \
+    docker run --rm -v $(expand_path $DIR):/app/ -v $(expand_path $(which $0)):/ci-tools  --entrypoint /bin/bash $IMAGE_NAME -c \
             'cd /app && /ci-tools/01_syntax.sh --exec-inner' 
     RET=$?
     # Cleanup if it is auto regenerated
