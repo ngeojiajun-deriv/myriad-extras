@@ -18,5 +18,5 @@ PACKAGE_NAME=$(grep -v -E '^#' $1 | head -n 1 | grep --only-matching -E "$REGEX"
 # Echo it to stderr instead so we know the current progress when it is chained inside bash
 echo "Service: $(echo $PACKAGE_NAME | tr '[:upper:]' '[:lower:]' | sed -E 's/::/\./g')" >&2;
 # Catch $api->service_by_name calls;
-REGEX="\\\$api->service_by_name\s*\(\s*[\'\\\"]([a-z\.\:]+)[\'\\\"]s*\)\s*\;";
+REGEX="\\\$api->service_by_name\s*\(\s*[\'\\\"]([a-z\.\:]+)[\'\\\"]s*\)\s*(\;|->)";
 grep -v -E '^#' $1 | grep -E "$REGEX" | sed -E "s/$REGEX/\1/g" | grep -E -o "([a-z]+\.[a-z]+)+" | uniq;
