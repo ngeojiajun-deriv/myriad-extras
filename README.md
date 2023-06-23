@@ -15,6 +15,11 @@ Try to guess the service name for the given `pm` file
 ## `04_service_deps.sh`
 Usage: `04_service_deps.sh <file>`
 Try to guess the dependencies for the services
+## `97_read_mans.sh`
+A simple alias to get a file explorer to the generated man pages using `98_build_man_for_everything.sh`
+## `98_build_man_for_everything.sh`
+Usage: `98_build_man_for_everything.sh <out dir>`
+Generate manual pages for all `*.pm` files under current directory
 ## `99_new_service.sh`
 Usage:  `99_new_service.sh <perl package name>`
 Create a new service from the template
