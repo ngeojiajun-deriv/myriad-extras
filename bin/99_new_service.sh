@@ -15,7 +15,7 @@ expand_path() {
 if [ -z "$1" ]; then
     bail "Usage: $0 <service name>";
 fi
-SERVICE_NAME=$(echo "$1" | grep -E '^([a-zA-Z]|\:\:)*[a-zA-Z]$');
+SERVICE_NAME=$(echo "$1" | grep -E '^([a-zA-Z0-9]|\:\:)*[a-zA-Z0-9]$');
 [ -z "$SERVICE_NAME" ] && bail "$1 is not a valid perl package name!"
 FILE_NAME=$(echo "$SERVICE_NAME" | sed -E 's/::/\//g' );
 # Make the needed dirs

@@ -38,10 +38,10 @@ else
         echo "Dockerfile present, building it as $IMAGE_NAME";
         docker build  "$DIR" -t $IMAGE_NAME || bail "Cannot build image! Exitting";
     fi
-    
+
     # Create the image and actually run it
     docker run --rm -v $(expand_path $DIR):/app/ -v $(expand_path $(which $0)):/ci-tools  --entrypoint /bin/bash $IMAGE_NAME -c \
-            'cd /app && /ci-tools/01_syntax.sh --exec-inner' 
+            'cd /app && /ci-tools/01_syntax.sh --exec-inner'
     RET=$?
     # Cleanup if it is auto regenerated
     [ -f "$DIR/Dockerfile" ] && [ "$IMAGE_NAME" != "$OVERIDDEN_IMAGE_NAME" ] && docker image rm $IMAGE_NAME;
