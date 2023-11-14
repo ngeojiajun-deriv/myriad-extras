@@ -15,6 +15,10 @@ Try to guess the service name for the given `pm` file
 ## `04_service_deps.sh`
 Usage: `04_service_deps.sh <file>`
 Try to guess the dependencies for the services
+## `05_test_all.sh`
+Usage: `05_test_all.sh <dir> ...`
+Attempt to check syntax of all files under `<dir>/lib/`. Will use the provided docker file
+or it will pick `deriv/myriad` when it is absent. This will additionally perform the tests if it is present
 ## `97_read_mans.sh`
 A simple alias to get a file explorer to the generated man pages using `98_build_man_for_everything.sh`
 ## `98_build_man_for_everything.sh`

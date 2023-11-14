@@ -1,5 +1,5 @@
 #!/bin/bash
-# 01_syntax.sh
+# 05_test_all.sh
 # Maintainer: jia.jun@deriv.com
 bail() {
     echo "$1" >&2;
@@ -25,6 +25,9 @@ if [ $DIR == '--exec-inner' ]; then
         export MODULE_TO_LOAD=$(grep -v -E '^#' $FILE | head -n 1 | grep --only-matching -E "$REGEX" | sed -E "s/$REGEX/\1/");
         prove -I/app/lib -MMyriad -v "$ROOT/../share/01_syntax.t" || bail "Check failed for the file $FILE";
     done
+    if [ -d "/app/t" ]; then
+        prove -I/app/lib -MMyriad -vr "/app/t";
+    fi
     exit 0;
 else
     echo "Starting test suite in $DIR";
@@ -51,7 +54,7 @@ else
 
     # Create the image and actually run it
     docker run --rm -v $(expand_path $DIR):/app/ -v "$(expand_path $(which $0))/../":/ci-tools  --entrypoint /bin/bash $IMAGE_NAME -c \
-            'cd /app && /ci-tools/bin/01_syntax.sh --exec-inner'
+            'cd /app && /ci-tools/bin/05_test_all.sh --exec-inner'
     RET=$?
     # Cleanup if it is auto regenerated
     [ -f "$DIR/Dockerfile" ] && [ "$IMAGE_NAME" != "$OVERIDDEN_IMAGE_NAME" ] && docker image rm $IMAGE_NAME;
