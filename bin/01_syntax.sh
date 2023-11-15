@@ -32,7 +32,7 @@ else
         bail  "Cannot find $DIR/lib/, exitting";
     fi
     if [ "$TOOLCHAIN" == 'docker-standalone' ]; then
-        prepare-apt-cpan.sh
+        ([ -f "cpanfile" ] || [ -f "aptfile" ]) && prepare-apt-cpan.sh;
         export PERL5LIB="$(pwd)/lib"
         $0 --exec-inner
         exit $?;
