@@ -19,14 +19,13 @@ if [ $DIR == '--exec-inner' ]; then
     # Inner suite
     for FILE in $(find . -type f -name '*.pm'); do
         ROOT=$(expand_path $(which $0));
-        #perl -cw -I/app/lib -MMyriad $FILE || bail "Check failed for the file $FILE";
         # Guess the module name
         REGEX="^\s*package\s+([a-zA-Z0-9\:]*[a-zA-Z0-9])\s*\;";
         export MODULE_TO_LOAD=$(grep -v -E '^#' $FILE | head -n 1 | grep --only-matching -E "$REGEX" | sed -E "s/$REGEX/\1/");
         prove -I/app/lib -MMyriad -v "$ROOT/../share/01_syntax.t" || bail "Check failed for the file $FILE";
     done
     if [ -d "/app/t" ]; then
-        prove -I/app/lib -MMyriad -vr "/app/t";
+        prove -I/app/lib -I/app/t/lib -MMyriad -vr "/app/t";
     fi
     exit 0;
 else
