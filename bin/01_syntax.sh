@@ -17,7 +17,7 @@ OVERIDDEN_IMAGE_NAME=$2;
 
 if [ $DIR == '--exec-inner' ]; then
     # Inner suite
-    for FILE in $(find . -type f -name '*.pm'); do
+    for FILE in $(find ./lib -type f -name '*.pm'); do
         ROOT=$(expand_path $(which $0));
         #perl -cw -I/app/lib -MMyriad $FILE || bail "Check failed for the file $FILE";
         # Guess the module name

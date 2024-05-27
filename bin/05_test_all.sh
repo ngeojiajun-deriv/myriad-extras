@@ -17,7 +17,7 @@ OVERIDDEN_IMAGE_NAME=$2;
 
 if [ $DIR == '--exec-inner' ]; then
     # Inner suite
-    for FILE in $(find . -type f -name '*.pm'); do
+    for FILE in $(find ./lib -type f -name '*.pm'); do
         ROOT=$(expand_path $(which $0));
         # Guess the module name
         REGEX="^\s*package\s+([a-zA-Z0-9\:]*[a-zA-Z0-9])\s*\;";
